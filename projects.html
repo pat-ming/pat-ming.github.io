@@ -41,6 +41,40 @@
     <section>
       <div class="entry">
         <div class="entry-head">
+          <h3>Agentic Workflow Plugin &mdash; Autonomous End-to-End Project Builder</h3>
+          <span class="when">Aug 2026 &ndash; Aug 2026</span>
+        </div>
+        <p class="role">Agent orchestration &middot; Developer tooling &middot; Autonomous software builds</p>
+        <p>Most AI coding tools help you write code faster. This one
+          <em>builds the whole project without me in the loop</em> &mdash; from a one-line
+          prompt to a planned, tested, committed repository &mdash; in my own development
+          style, encoded as a Claude Code plugin.</p>
+        <ul>
+          <li>An orchestrator command decomposes the prompt into a dependency-ordered
+            plan, then delegates each phase to a fresh headless agent session. The agents
+            share no memory and coordinate only through git and the filesystem, so the
+            system stays legible and every decision leaves a trace.</li>
+          <li>Correctness is fixed up front by machine-checkable verifiers &mdash; one per
+            phase &mdash; frozen by hooks so the implementing agents physically cannot edit
+            or grade their own tests. Same deterministic-verifier, anti&#8209;reward&#8209;hacking
+            philosophy as my RL work: no LLM judge in the loop.</li>
+          <li>Hand-built from Claude Code primitives: a slash-command orchestrator, three
+            specialized subagents (verifier authoring, dead-code cleanup, finalization),
+            guardrail hooks, and a phone-notification skill.</li>
+          <li>Each phase makes an implementation commit and a cleanup commit, with
+            automatic rollback to the last good state if cleanup regresses any verifier;
+            a final from-scratch clone-and-run check proves the build reproduces.</li>
+          <li>Runs unattended, pushing progress and failure notifications to my phone so a
+            long build needs no babysitting.</li>
+        </ul>
+        <!-- EDIT: replace with the actual repository URL -->
+        <p class="links"><a href="https://github.com/pat-ming/REPO-NAME">Repository &rarr;</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="entry">
+        <div class="entry-head">
           <h3>RL Environment for Mathematical Construction and Counterexample Tasks</h3>
           <span class="when">Jun 2026 &ndash; present</span>
         </div>
@@ -52,7 +86,7 @@
           to fake and much harder to grade.</p>
 
         <ul>
-          <li>86 tasks spanning linear algebra, abstract algebra, and real analysis.</li>
+          <li>314 tasks spanning linear algebra, abstract algebra, and real analysis.</li>
           <li>Scored by 28 hand-designed verifiers. No LLM judge anywhere in the
             pipeline, so the reward signal is deterministic and inspectable.</li>
           <li>Red-teamed the verifiers against reward hacking, surfacing and closing
@@ -62,7 +96,7 @@
         </ul>
 
         <!-- EDIT: replace with the actual repository URL -->
-        <p class="links"><a href="https://github.com/pat-ming">Repository &rarr;</a></p>
+        <p class="links"><a href="https://github.com/pat-ming/constr-counter_MATH_ENV">Repository &rarr;</a></p>
       </div>
     </section>
 
@@ -87,7 +121,7 @@
         </ul>
 
         <!-- EDIT: replace with the actual repository URL -->
-        <p class="links"><a href="https://github.com/pat-ming">Repository &rarr;</a></p>
+        <p class="links"><a href="https://github.com/pat-ming/gdg-devfest-26">Repository &rarr;</a></p>
       </div>
     </section>
 

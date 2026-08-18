@@ -4,10 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- EDIT: browser tab text -->
-  <title>Patrick Ming</title>
+  <title>Patrick Ming&rsquo;s Website</title>
 
-  <!-- EDIT: one-sentence description Google shows under your link -->
   <meta name="description" content="Patrick Ming — undergraduate in Computer Science and Mathematics at Washington University in St. Louis. Reinforcement learning, post-training, and applied machine learning.">
 
   <!-- the tab icon. washu_emblem.png must sit next to this file in the repo -->
@@ -43,23 +41,17 @@
     <section id="about">
       <h2>About</h2>
       <p class="lede">I&rsquo;m an undergraduate studying Computer Science and
-        Mathematics at Washington University in St. Louis, expecting to
-        graduate in December 2028.</p>
+        Mathematics at Washington University in St. Louis. (Aug 2025 - Exp. Dec 2028)</p>
 
-      <p>My work sits at the point where reinforcement learning meets
-        problems that are hard to specify: designing reward signals that
-        can&rsquo;t be gamed, building environments where correctness is
-        actually checkable, and understanding why RL agents fail in ways
-        that supervised models don&rsquo;t. Most recently I spent a summer at
-        <a href="https://qognitive.com">Qognitive</a> in New York working on
-        hybrid RL algorithms and quantum algorithmic cooling under a
-        Department of Energy&ndash;funded project.</p>
+      <p>I&rsquo;m deeply interested in reinforcement learning, and how to leverage its strengths to build strong and reliable AI systems with post training.
+        This summer, I interned at <a href="https://qognitive.com">Qognitive</a> in 
+        New York. There, I worked on building a new RL algorithms for quantum algorithmic cooling under a U.S. Department of Energy funded project. 
+      I engineered a hybrid algorithm that outperformed both vanilla SAC and PPO on 9 out of 11 gymnasium environments.</p>
 
-      <p>Before that, and alongside it, I&rsquo;ve been building things that
-        are useful to people around me &mdash; a retrieval system that cuts
-        WashU&rsquo;s faculty-research search from three hours to five minutes,
-        and a benchmark for mathematical construction tasks that current
-        frontier models still find genuinely hard.</p>
+      <p>Other work I&rsquo;ve done have been spent on building things that are useful to me and people around me.
+        A RAG based WashU research faculty matchmaker that turns a PI search from three hours to five minutes,
+        and most recently, a Claude plugin that optimizes my building workflow. 
+      </p>
 
       <p>I&rsquo;m always glad to talk about research, and I&rsquo;m looking for
         opportunities in machine learning research and quantitative work.
@@ -89,18 +81,34 @@
     <section id="work">
       <h2>Selected Work</h2>
 
+      <div class = "entry">
+        <div class = "entry-head">
+          <h3>Agentic Workflow Claude Plugin</h3>
+          <span class ="when">2026 &ndash; present</span>
+        </div>
+        <p class="role">A Claude Code plugin that autonomously builds entire projects end-to-end from a single prompt,
+    encoding my personal development workflow. A hand-written orchestrator decomposes the request into
+    a dependency-ordered plan, freezes a machine-checkable verifier for each phase, then delegates
+    implementation to fresh headless agent sessions that coordinate entirely through git and the
+    filesystem. Custom hooks enforce the verifiers as a tamper-proof contract &mdash; so the build
+    agents can&rsquo;t grade their own work &mdash; while bespoke subagents handle verifier authoring,
+    cleanup, and finalization. Runs unattended for hours and pings my phone when it finishes or stalls.
+        </p>
+        <p class="links"> <a href="https://github.com/pat-ming/agentic_workflow_plugin">Code on Github &rarr;</a></p>
+
+      </div>
+
       <div class="entry">
         <div class="entry-head">
           <h3>RL Environment for Mathematical Construction Tasks</h3>
           <span class="when">2026 &ndash; present</span>
         </div>
-        <p class="role">An 86-task reinforcement learning environment and
+        <p class="role">An 314-task reinforcement learning environment and
           benchmark spanning linear algebra, algebra, and analysis, scored by
           28 hand-designed verifiers with no LLM in the loop. Red-teaming
           surfaced 735 wrong-object acceptances before the verifiers held;
           MiniMax-M2 reaches 79% on the hardest tier.</p>
-        <!-- EDIT: paste the real repo URL -->
-        <p class="links"><a href="https://github.com/pat-ming">Code on GitHub &rarr;</a></p>
+        <p class="links"><a href="https://github.com/pat-ming/constr-counter_MATH_ENV">Code on GitHub &rarr;</a></p>
       </div>
 
       <div class="entry">
@@ -113,8 +121,7 @@
           five-minute query. Built on a custom scraper covering 1,584 WashU
           STEM faculty profiles. Being prepared for use in first-year STEM
           courses.</p>
-        <!-- EDIT: paste the real repo URL -->
-        <p class="links"><a href="https://github.com/pat-ming">Code on GitHub &rarr;</a></p>
+        <p class="links"><a href="https://github.com/pat-ming/gdg-devfest-26">Code on GitHub &rarr;</a></p>
       </div>
 
       <p><a href="projects.html">All projects &rarr;</a></p>
@@ -127,7 +134,7 @@
         <li><span class="label">Email</span> <a href="mailto:mingp@wustl.edu">mingp@wustl.edu</a></li>
         <li><span class="label">GitHub</span> <a href="https://github.com/pat-ming">github.com/pat-ming</a></li>
         <!-- EDIT: paste your full LinkedIn URL — the one on your CV is incomplete -->
-        <li><span class="label">LinkedIn</span> <a href="https://www.linkedin.com/in/YOUR-HANDLE">linkedin.com/in/YOUR-HANDLE</a></li>
+        <li><span class="label">LinkedIn</span> <a href="https://www.linkedin.com/in/pm1ng">linkedin.com/in/pm1ng</a></li>
         <li><span class="label">CV</span> <a href="cv.html">Web version</a> &middot; <a href="resume.pdf">PDF</a></li>
       </ul>
     </section>
