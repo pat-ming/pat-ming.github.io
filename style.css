@@ -1,0 +1,176 @@
+/* ============================================================
+   style.css  —  shared by every page on the site.
+   Change something here and it changes everywhere.
+
+   THE ONLY BLOCK MOST PEOPLE EVER EDIT is the one directly
+   below: change these values to restyle the whole site.
+   ============================================================ */
+
+:root {
+  --bg:        #000000;   /* page background            */
+  --ink:       #d6d6d6;   /* body text                  */
+  --ink-bright:#ffffff;   /* headings, your name        */
+  --ink-soft:  #8e8e8e;   /* dates, captions, footer    */
+  --line:      #3a3a3a;   /* hairline rules             */
+  --accent:    #9db8ff;   /* links                      */
+
+  --measure:   940px;     /* max page width             */
+}
+
+/* ---------- reset ---------- */
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  margin: 0;
+  padding: 44px 40px 90px;
+}
+
+.wrap { max-width: var(--measure); margin: 0 auto; }
+
+/* ---------- masthead: name left, emblem right ---------- */
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 18px;
+}
+
+.masthead h1,
+.masthead .sitename {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-bright);
+  text-decoration: none;
+}
+
+.masthead .emblem {
+  height: 68px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+/* ---------- nav ---------- */
+.mainnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin: 18px 0 52px;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mainnav a { color: var(--ink-soft); text-decoration: none; }
+.mainnav a:hover { color: var(--ink-bright); }
+.mainnav a.here { color: var(--ink-bright); }
+
+/* ---------- sections ---------- */
+section { margin-bottom: 54px; }
+
+h2 {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 8px;
+  margin: 0 0 22px;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink-bright);
+  margin: 0 0 2px;
+}
+
+p { margin: 0 0 16px; max-width: 74ch; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+ul { margin: 0 0 16px; padding-left: 20px; max-width: 74ch; }
+li { margin: 7px 0; }
+
+/* ---------- the entry block: used for jobs, projects, degrees ---------- */
+.entry { margin-bottom: 30px; max-width: 80ch; }
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.entry .role  { color: var(--ink); font-size: 15px; margin: 0 0 8px; }
+.entry .when  { color: var(--ink-soft); font-size: 13.5px; white-space: nowrap; }
+.entry ul     { margin-top: 6px; }
+.entry .links { font-size: 14px; margin-top: 8px; }
+.entry .links a + a { margin-left: 16px; }
+
+/* ---------- small pieces ---------- */
+.lede { font-size: 18px; color: var(--ink); max-width: 68ch; }
+
+.tag {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 2px 9px;
+  margin: 0 6px 8px 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.contact { list-style: none; padding: 0; }
+.contact li { margin: 4px 0; }
+.contact .label {
+  display: inline-block;
+  width: 90px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: 20px;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+}
+
+/* ---------- phones ---------- */
+@media (max-width: 620px) {
+  body { padding: 28px 20px 60px; }
+  .masthead h1, .masthead .sitename { font-size: 19px; letter-spacing: 0.11em; }
+  .masthead .emblem { height: 44px; }
+  .mainnav { gap: 16px; font-size: 13px; margin-bottom: 38px; }
+  .entry-head { flex-direction: column; gap: 0; }
+  .entry .when { white-space: normal; }
+  .contact .label { display: block; width: auto; }
+}
+
+/* ---------- printing (mostly for the CV page) ---------- */
+@media print {
+  :root {
+    --bg: #fff; --ink: #111; --ink-bright: #000;
+    --ink-soft: #555; --line: #bbb; --accent: #000;
+  }
+  body { padding: 0; font-size: 11pt; }
+  .mainnav, .noprint { display: none; }
+  a { text-decoration: underline; }
+}

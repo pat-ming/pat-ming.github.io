@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- EDIT: browser tab text -->
+  <title>Patrick Ming</title>
+
+  <!-- EDIT: one-sentence description Google shows under your link -->
+  <meta name="description" content="Patrick Ming — undergraduate in Computer Science and Mathematics at Washington University in St. Louis. Reinforcement learning, post-training, and applied machine learning.">
+
+  <!-- the tab icon. washu_emblem.png must sit next to this file in the repo -->
+  <link rel="icon" href="washu_emblem.png">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ MASTHEAD ============ -->
+  <header class="masthead">
+    <h1>Patrick Ming</h1>
+    <img class="emblem" src="washu_emblem.png" alt="Washington University in St. Louis emblem">
+  </header>
+
+  <!-- ============ NAV ============
+       'here' marks the current page. On other pages, move that
+       class to whichever link matches. -->
+  <nav class="mainnav">
+    <a class="here" href="index.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+    <a href="https://github.com/pat-ming">GitHub</a>
+    <a href="mailto:mingp@wustl.edu">Email</a>
+  </nav>
+
+  <main>
+
+    <!-- ============ ABOUT ============
+         EDIT: this is the part people actually read. Rewrite it in
+         your own voice — two or three sentences is the right length. -->
+    <section id="about">
+      <h2>About</h2>
+      <p class="lede">I&rsquo;m an undergraduate studying Computer Science and
+        Mathematics at Washington University in St. Louis, expecting to
+        graduate in December 2028.</p>
+
+      <p>My work sits at the point where reinforcement learning meets
+        problems that are hard to specify: designing reward signals that
+        can&rsquo;t be gamed, building environments where correctness is
+        actually checkable, and understanding why RL agents fail in ways
+        that supervised models don&rsquo;t. Most recently I spent a summer at
+        <a href="https://qognitive.com">Qognitive</a> in New York working on
+        hybrid RL algorithms and quantum algorithmic cooling under a
+        Department of Energy&ndash;funded project.</p>
+
+      <p>Before that, and alongside it, I&rsquo;ve been building things that
+        are useful to people around me &mdash; a retrieval system that cuts
+        WashU&rsquo;s faculty-research search from three hours to five minutes,
+        and a benchmark for mathematical construction tasks that current
+        frontier models still find genuinely hard.</p>
+
+      <p>I&rsquo;m always glad to talk about research, and I&rsquo;m looking for
+        opportunities in machine learning research and quantitative work.
+        The fastest way to reach me is
+        <a href="mailto:mingp@wustl.edu">mingp@wustl.edu</a>.</p>
+    </section>
+
+    <!-- ============ RESEARCH INTERESTS ============ -->
+    <section id="interests">
+      <h2>Research Interests</h2>
+      <ul>
+        <li><strong>Post-training and deep reinforcement learning</strong> &mdash;
+          reward design, verifier robustness, and algorithms that stay stable
+          where SAC and PPO do not.</li>
+        <li><strong>Evaluation that resists gaming</strong> &mdash; building
+          benchmarks scored by hand-written verifiers rather than LLM judges,
+          then red-teaming those verifiers until they hold.</li>
+        <li><strong>Retrieval-augmented generation</strong> &mdash; multi-vector
+          retrieval over structured domain corpora.</li>
+        <li><strong>Applied machine learning</strong> &mdash; computer vision,
+          and computational methods in finance.</li>
+      </ul>
+    </section>
+
+    <!-- ============ SELECTED WORK ============
+         Short version here; the full write-ups live on projects.html -->
+    <section id="work">
+      <h2>Selected Work</h2>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>RL Environment for Mathematical Construction Tasks</h3>
+          <span class="when">2026 &ndash; present</span>
+        </div>
+        <p class="role">An 86-task reinforcement learning environment and
+          benchmark spanning linear algebra, algebra, and analysis, scored by
+          28 hand-designed verifiers with no LLM in the loop. Red-teaming
+          surfaced 735 wrong-object acceptances before the verifiers held;
+          MiniMax-M2 reaches 79% on the hardest tier.</p>
+        <!-- EDIT: paste the real repo URL -->
+        <p class="links"><a href="https://github.com/pat-ming">Code on GitHub &rarr;</a></p>
+      </div>
+
+      <div class="entry">
+        <div class="entry-head">
+          <h3>WUSTL Research Matchmaker</h3>
+          <span class="when">2026</span>
+        </div>
+        <p class="role">A multi-vector RAG system that matches students to
+          faculty by research fit, turning a three-hour manual search into a
+          five-minute query. Built on a custom scraper covering 1,584 WashU
+          STEM faculty profiles. Being prepared for use in first-year STEM
+          courses.</p>
+        <!-- EDIT: paste the real repo URL -->
+        <p class="links"><a href="https://github.com/pat-ming">Code on GitHub &rarr;</a></p>
+      </div>
+
+      <p><a href="projects.html">All projects &rarr;</a></p>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact">
+      <h2>Elsewhere</h2>
+      <ul class="contact">
+        <li><span class="label">Email</span> <a href="mailto:mingp@wustl.edu">mingp@wustl.edu</a></li>
+        <li><span class="label">GitHub</span> <a href="https://github.com/pat-ming">github.com/pat-ming</a></li>
+        <!-- EDIT: paste your full LinkedIn URL — the one on your CV is incomplete -->
+        <li><span class="label">LinkedIn</span> <a href="https://www.linkedin.com/in/YOUR-HANDLE">linkedin.com/in/YOUR-HANDLE</a></li>
+        <li><span class="label">CV</span> <a href="cv.html">Web version</a> &middot; <a href="resume.pdf">PDF</a></li>
+      </ul>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Washington University in St. Louis &middot; Last updated August 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>

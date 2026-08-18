@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects &middot; Patrick Ming</title>
+  <meta name="description" content="Research projects and software by Patrick Ming.">
+  <link rel="icon" href="washu_emblem.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <!-- on inner pages the name is a link back home -->
+    <a class="sitename" href="index.html">Patrick Ming</a>
+    <img class="emblem" src="washu_emblem.png" alt="Washington University in St. Louis emblem">
+  </header>
+
+  <nav class="mainnav">
+    <a href="index.html">About</a>
+    <a class="here" href="projects.html">Projects</a>
+    <a href="cv.html">CV</a>
+    <a href="https://github.com/pat-ming">GitHub</a>
+    <a href="mailto:mingp@wustl.edu">Email</a>
+  </nav>
+
+  <main>
+
+    <section>
+      <h2>Projects</h2>
+      <p>Longer write-ups of what I&rsquo;ve been building. Everything here has
+        code behind it &mdash; the repository links go straight to it.</p>
+    </section>
+
+    <!-- ============================================================
+         TO ADD A PROJECT: copy one <div class="entry"> block below,
+         paste it, and change the words. That's the whole process.
+         ============================================================ -->
+
+    <section>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>RL Environment for Mathematical Construction and Counterexample Tasks</h3>
+          <span class="when">Jun 2026 &ndash; present</span>
+        </div>
+        <p class="role">Post-training &middot; Reinforcement learning &middot; LLM evaluation</p>
+
+        <p>Most math benchmarks ask a model for an answer. This one asks it to
+          <em>construct an object</em> &mdash; a matrix with a given property, a
+          counterexample to a plausible-sounding claim &mdash; which is much harder
+          to fake and much harder to grade.</p>
+
+        <ul>
+          <li>86 tasks spanning linear algebra, abstract algebra, and real analysis.</li>
+          <li>Scored by 28 hand-designed verifiers. No LLM judge anywhere in the
+            pipeline, so the reward signal is deterministic and inspectable.</li>
+          <li>Red-teamed the verifiers against reward hacking, surfacing and closing
+            735 cases where a wrong object was being accepted.</li>
+          <li>MiniMax-M2, a frontier model, scores 79% on the hardest tier &mdash;
+            leaving real headroom for the benchmark to be useful.</li>
+        </ul>
+
+        <!-- EDIT: replace with the actual repository URL -->
+        <p class="links"><a href="https://github.com/pat-ming">Repository &rarr;</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>WUSTL Research Matchmaker</h3>
+          <span class="when">Jan 2026 &ndash; Apr 2026</span>
+        </div>
+        <p class="role">Retrieval-augmented generation &middot; Information retrieval</p>
+
+        <p>Finding a faculty member whose research actually matches your interests
+          is a three-hour slog through department pages written in twelve different
+          formats. This turns it into a five-minute query.</p>
+
+        <ul>
+          <li>Multi-vector RAG model returning ranked compatibility scores against
+            WashU faculty from a plain-language description of your interests.</li>
+          <li>Custom scraper built to tabulate 1,584 STEM faculty and their research
+            profiles into a consistent, queryable corpus.</li>
+          <li>Being prepared for distribution to first-year STEM courses.</li>
+        </ul>
+
+        <!-- EDIT: replace with the actual repository URL -->
+        <p class="links"><a href="https://github.com/pat-ming">Repository &rarr;</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Hybrid Reinforcement Learning for Quantum Algorithmic Cooling</h3>
+          <span class="when">May 2026 &ndash; Jul 2026</span>
+        </div>
+        <p class="role">Qognitive Inc. &middot; Department of Energy&ndash;funded project</p>
+
+        <p>Summer research on reinforcement learning algorithms that hold up outside
+          benchmark conditions.</p>
+
+        <ul>
+          <li>Independently designed a hybrid RL algorithm that outperforms both SAC
+            and PPO on 9 of the 11 Gymnasium environments tested.</li>
+          <li>Built an RL-guided agentic controller for quantum algorithmic cooling
+            on top of that algorithm.</li>
+          <li>Experimented with energy-based models in RL, developing a modular
+            energy critic architecture aimed at mitigating primacy bias.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ ADD YOUR NEXT PROJECT HERE ============
+    <section>
+      <div class="entry">
+        <div class="entry-head">
+          <h3>Project title</h3>
+          <span class="when">Month Year</span>
+        </div>
+        <p class="role">One line on the area or the stack</p>
+        <p>A sentence on the problem and why it mattered.</p>
+        <ul>
+          <li>A concrete result, with a number in it if you have one.</li>
+        </ul>
+        <p class="links"><a href="URL">Repository &rarr;</a></p>
+      </div>
+    </section>
+    ==================================================== -->
+
+  </main>
+
+  <footer>
+    <p>Washington University in St. Louis &middot; Last updated August 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>
