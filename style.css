@@ -134,6 +134,16 @@ li { margin: 7px 0; }
   color: var(--ink-soft);
 }
 
+/* ---------- pull-quote, used on the research blog ---------- */
+blockquote {
+  margin: 14px 0 0;
+  padding-left: 16px;
+  border-left: 2px solid var(--line);
+  color: var(--ink-soft);
+  font-style: italic;
+  max-width: 74ch;
+}
+
 .contact { list-style: none; padding: 0; }
 .contact li { margin: 4px 0; }
 .contact .label {
