@@ -7,6 +7,7 @@
   <meta name="description" content="Patrick Ming's research diary — notes on papers I'm reading, roughly one a week.">
   <link rel="icon" href="washu_emblem.png">
   <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -50,29 +51,169 @@
 
       <!-- ================= NEWEST PAPER GOES HERE ================= -->
 
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://arxiv.org/pdf/2609.30652">Recursive Self-Improvement via On-Policy Distillation for Reasoning</a></h3>
+          <span class="when">September 28th, 2026</span>
+        </div>
+        <p class="role">Shangjian Yin, Zehao Zhao, Kavosh Asadi, Rui Liu, Yuchen Lu, Shike Mei, Hang Cui, Luke Simon, Zhouxing Shi, Hamed Firooz &middot; arXiv 2026</p>
+
+        <p>OPSD removes the external teacher by using a frozen copy of the student that gets to see
+          the ground-truth solution. The problem this paper finds is that the frozen teacher is a
+          bad guide on wrong trajectories: even knowing the answer, it puts 94.5% on EOS at the end
+          of an incorrect response and only 22% on reflection tokens like &ldquo;Wait.&rdquo;
+          Essentially, it would rather stop than tell the student to rethink. The fix (DCE) is to
+          refresh the teacher from the updated student every round, so it is the same weights with
+          a different context and a stop-gradient. Heuristically this makes sense, since a teacher
+          stuck at step 0 can&rsquo;t teach a revision habit it never picked up. On Qwen3-8B the
+          average goes from 30.35 (OPSD) to 65.76. SRCL then trains on shorter verified rewrites to
+          keep the length down, and it collapses without DCE, so it isn&rsquo;t doing the real
+          work. What I&rsquo;m not sold on: the base model with thinking mode on already gets 62.08
+          at about the same token count, and at 1.7B it beats this method outright (36.88 v.s.
+          26.88). So is this self-improvement, or is it teaching the non-thinking model to think?
+          Responses go from 4K to 19K tokens, which looks a lot like the length growth in OPSA. It
+          also partly answers my question of how far this can iterate. Not that far. Accuracy
+          peaks around step 100 and the 1.7B run falls apart after that.</p>
+
+        \[
+        \mathcal{L}_G^{(k)} = \mathbb{E}_{(x,g),\; y^{(k)} \sim p_{\theta_k}(\cdot \mid x)}
+          \left[\frac{1}{m} \sum_{t=1}^{m} \Delta\left(q_{k,t},\, p_{k,t}\right)\right],
+        \qquad
+        q_{k,t} = \operatorname{stopgrad}\left[\, p_{\theta_k}\left(\cdot \mid C_t^{\text{prev}}(x, g, \tau, \tilde{y}^{(k)}_{\lt t})\right)\right]
+        \]
+
+        <blockquote>&ldquo;Frozen teacher favors termination over reflection.&rdquo;</blockquote>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://arxiv.org/pdf/2604.13016">Rethinking On-Policy Distillation of Large Language Models: Phenomenology, Mechanism, and Recipe</a></h3>
+          <span class="when">September 27th, 2026</span>
+        </div>
+        <p class="role">Yaxuan Li, Yuxin Zuo, Bingxiang He, Jinqian Zhang, Chaojun Xiao, Cheng Qian, Tianyu Yu, Huan-ang Gao, Wenkai Yang, Zhiyuan Liu, Ning Ding &middot; arXiv 2026</p>
+
+        <p>The failure mode that got me to read this: a stronger teacher can completely fail to
+          improve a student while a weaker one succeeds. The paper says two conditions decide
+          whether OPD works. First, the student and teacher need compatible thinking patterns.
+          Heuristically this makes sense, since if the teacher thinks differently, a large
+          proportion of the distillation signal goes to speaking style and not capability. Second,
+          a higher score doesn&rsquo;t mean new knowledge. Don&rsquo;t have to think too hard about
+          this one. A teacher needs to know something the student hasn&rsquo;t already seen. The
+          reverse distillation experiment is my favorite part: distill an RL-trained 1.5B model
+          toward its own pre-RL checkpoint and it regresses right back, and a 7B teacher from the
+          same family drags it to the same place. So OPD is ostensibly copying thinking patterns,
+          not scores. Mechanically, the gains come from the tokens in both models&rsquo; top-k
+          (the overlap ratio goes from 72% to 91% in a successful run), and training on only those
+          matches full OPD. I&rsquo;m not sure how to square that with OPSA, which says the
+          low-logp tokens are the ones that matter. The part that worries me most is the end: the
+          teacher&rsquo;s reward gets worse the deeper into the trajectory you go, which is a bad
+          sign for long-horizon work.</p>
+
+        \[
+        \mathcal{M}_{\text{overlap}} = \mathbb{E}_t\left[\frac{\left|S_t^{(p)} \cap S_t^{(q)}\right|}{k}\right],
+        \qquad
+        S_t^{(p)} = \operatorname{TopK}(p_t, k),\quad S_t^{(q)} = \operatorname{TopK}(q_t, k)
+        \]
+
+        <blockquote>&ldquo;Higher scores &ne; new knowledge.&rdquo;</blockquote>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="AI%20for%20math%20discovery.pdf" target="_blank" rel="noopener">How Is AI Actually Producing New Mathematics? (verifiers and pushing reasoning)</a></h3>
+          <span class="when">September 14th, 2026</span>
+        </div>
+        <p class="role">Reading across Tsoukalas et al. (arXiv:2605.22763), Feng, Trinh, Bingham et al. (arXiv:2601.22401), Novikov et al. (arXiv:2506.13131), and Tzachristas, Tzachristas &amp; Sui (ACL 2026) &middot; a talk I put together for HINT Lab</p>
+
+        <p>This week I stepped back from training tricks and tried to answer a simpler question: when an AI
+          &ldquo;solves&rdquo; an open problem, who actually decides it counts? The honest answer is that it&rsquo;s
+          always a verifier, and the kind of verifier you pick determines both what you can reach and how it fails.
+          The formal-proof-search paper is the clean case: the verifier is the Lean type-checker, so correctness is
+          exact, and they resolve 9 of 353 open Erd&odblac;s problems (4 genuinely novel) plus 44 of 492 OEIS
+          conjectures. What struck me is that the dumbest loop &mdash; a basic agent alternating generation with Lean
+          &mdash; replicates the Erd&odblac;s wins; the fancy evolutionary search only pays off in cost on the two
+          hardest instances. The verifier is doing the real work, not the search. The failure mode is the
+          formalization gap: a mis-stated theorem still compiles, and they had to amend &ldquo;density&rdquo; to
+          &ldquo;lower density&rdquo; in their own inputs after the agent found proofs.</p>
+
+        <p>When the verifier is a person instead (the Gemini Deep Think study on 700 &ldquo;open&rdquo; Erd&odblac;s
+          problems), the funnel is brutal: 700 attempted &rarr; 212 flagged plausible &rarr; 27 after non-expert
+          filtering &rarr; 13 meaningfully correct &rarr; 4 novel, and even that count was &ldquo;once as high as 9&rdquo;
+          before literature search knocked it down. The expensive step turns out not to be proving anything &mdash; it&rsquo;s
+          checking whether the result already exists. Half the &ldquo;solutions&rdquo; were rediscoveries, including one
+          sitting in an offhand 1981 remark for 44 years. And when the verifier is just a score (AlphaEvolve), it&rsquo;s
+          the cheapest of the three and gives you the 4&times;4 complex matrix multiplication in 48 scalar products, the
+          first beat on Strassen in 56 years &mdash; but it only reaches problems whose answer is a constructible object
+          you can benchmark, and benchmarks get gamed under search pressure. The thread I kept pulling on: in all three,
+          the model will sometimes quietly answer a slightly different question than the one asked, and whether that gets
+          caught is entirely a property of the verifier, not the model.</p>
+
+        <blockquote>&ldquo;The strongest results are those where verification is cheap relative to generation.&rdquo;</blockquote>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://arxiv.org/pdf/2608.31046">Does On-Policy Distillation Really Distill? From Noisy Teacher to Self-Improvement</a></h3>
+          <span class="when">September 1st, 2026</span>
+        </div>
+        <p class="role">Yi Ding, Ruqi Zhang &middot; arXiv 2026</p>
+
+        <p>In OPD the teacher grades trajectories that are off-policy for it, so this paper asks
+          whether that supervision is even reliable. It isn&rsquo;t. For a 4B teacher about 30% of
+          the answer-token signals point the wrong way, and it gets worse as the teacher gets
+          bigger. The surprising part is that the student doesn&rsquo;t care: training on only the
+          noisy trajectories, only the clean ones, or both all land in about the same place. So,
+          where do the gains come from? Ostensibly from suppressing the low-logp tokens the student
+          sampled. Throw away the top 80% of tokens by logp, replace every advantage with a fixed
+          &minus;0.5, and you still match OPD with no teacher at all. Heuristically this makes
+          sense to me, since a token the student is already confident in has basically no gradient
+          left. OPSA then scales the negative advantage with entropy and beats OPD by a lot (48.85
+          v.s. 32.08 Avg@32 on AIME24 with Qwen3-1.7B). I find this a little unsettling next to
+          OPDVR, where the sign of the teacher signal clearly mattered. The noise here is only
+          defined on the boxed answer tokens though, so it may not be the same split. It also
+          raises the question of how far this can iterate, since it&rsquo;s only redistributing
+          mass the student already has.</p>
+
+        \[
+        \mathcal{L}_{\text{OPSA}} = -\mathbb{E}\left[\frac{1}{|S_{\text{lowest20}}|}
+          \sum_{i \in S_{\text{lowest20}}} A_i^{\text{dyn}} \log \pi_\theta(y_i \mid x;\, y_{\lt i})\right],
+        \qquad
+        A_i^{\text{dyn}} = -\frac{1}{2} - \frac{H_i - H_{\min}}{2\,(H_{\max} - H_{\min})}
+        \]
+
+        <blockquote>&ldquo;&hellip;an operation that requires no teacher at all.&rdquo;</blockquote>
+      </article>
+
       <!-- ---------- paper entry template / example ---------- -->
       <article class="entry">
         <div class="entry-head">
-          <!-- EDIT 1: paper title, linked to the paper (arXiv, DOI, PDF...) -->
-          <h3><a href="https://arxiv.org/abs/1707.06347">Proximal Policy Optimization Algorithms</a></h3>
-          <!-- EDIT 2: the week you read it -->
-          <span class="when">Week of Oct 6, 2026</span>
+          <h3><a href="https://arxiv.org/pdf/2608.24696">On-policy Distillation with Verifiable Reward</a></h3>
+          <span class="when">August 31st, 2026</span>
         </div>
-        <!-- EDIT 3: authors and venue, one line -->
-        <p class="role">Schulman, Wolski, Dhariwal, Radford, Klimov &middot; arXiv 2017</p>
+        <p class="role">Wenze Lin, Jiale Zhao, Xitai Jiang, Songde Rao, Yining Li, Shenzhi Wang, Bingxiang He, Gao Huang &middot; arXiv 2026</p>
 
-        <!-- EDIT 4: your notes. Keep or add as many <p> paragraphs and
-             <ul><li> bullets as you like. -->
-        <p>One-paragraph summary of what the paper does and why it caught my eye.
-          Replace this with your own read of the contribution.</p>
-        <ul>
-          <li>A key idea, in your own words.</li>
-          <li>Something you&rsquo;d want to try, or a question it left open.</li>
-          <li>How it connects to what I&rsquo;m working on.</li>
-        </ul>
+        <p>RLVR grades the trajectory, so the reward is correct but sparse. OPD grades every token,
+          so the reward is dense, but nothing in the loss cares whether the answer was right. This
+          paper combines the two with a single ReLU and no new hyperparameters, which I honestly
+          didn&rsquo;t expect to be enough. The verifier picks the sign of the per-token reward and
+          the teacher-student log-ratio picks the magnitude. Heuristically this makes sense to me:
+          if the teacher is more confident in a token and the trajectory ended up correct, it was
+          likely a good choice, so reward it. If the student was the confident one and the answer
+          was wrong, punish it. Everything else gets no feedback, which turns out to be about half
+          the tokens. That part surprised me. The gains over standard OPD are small (47.8 to 49.1
+          average on Qwen3-4B), so I&rsquo;m not fully sold yet, but I like how little machinery it
+          needs. It also raises the question of whether the thrown-away tokens were ever doing
+          anything, which is where the next paper I read picks up.</p>
 
-        <!-- EDIT 5 (optional): a line worth remembering. Delete if unused. -->
-        <blockquote>&ldquo;A sentence from the paper worth keeping.&rdquo;</blockquote>
+        \[
+        R_{\text{OPDVR}}(o_t) =
+        \begin{cases}
+          \max\left(0,\ \log \dfrac{\pi_T(o_t \mid q, o_{\lt t})}{\pi_\theta(o_t \mid q, o_{\lt t})}\right) \cdot (+1), &amp; \text{trajectory correct,} \\[1.2em]
+          \max\left(0,\ \log \dfrac{\pi_\theta(o_t \mid q, o_{\lt t})}{\pi_T(o_t \mid q, o_{\lt t})}\right) \cdot (-1), &amp; \text{trajectory incorrect.}
+        \end{cases}
+        \]
+
+        <blockquote>&ldquo;&hellip; Combining them is a promising direction: OPD supplies dense supervisory signals, while RLVR provides task-level correctness&rdquo;</blockquote>
       </article>
       <!-- ---------- end template ---------- -->
 
