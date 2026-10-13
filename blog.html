@@ -53,6 +53,33 @@
 
       <article class="entry">
         <div class="entry-head">
+          <h3><a href="https://arxiv.org/pdf/2610.12855">Mitigating Capability Degredation in LLM Self-Improvement Via Representation Geometry Regularization</a></h3>
+          <span class="when">October 12th, 2026</span>
+        </div>
+        <p class="role">Jiaqi Tian, Ting Long &middot; arXiv 2026</p>
+
+        <p> OPSD can be shown to display capability degredation over time. That is, problems that the student model would've normally
+          gotten right at the beginning of training begin to become more "difficult" as the number of training epochs increase. This is a 
+          failure mode that many people are aware of but its not one whose direct root cause is easily identifiable. The authors perform a 
+          theoreitcal study and identify potential causes: 1). When viewing the hidden representations of the entire sequence at the final layer before logits, 
+          there is clear clustering where intra-cluster compactness and inter-cluster borders are clear, and 2). The entropy between the student and 
+          teacher do not change very much. Motivated by this, the authors introduce Representation Geometry Regularization (basically adding in another loss term).</p>
+
+        <img src="RGR.png" alt="Representation Geometry Regularization" style="display:block; max-width:100%; height:auto; margin:1em auto;">
+
+        \begin{gather*}
+          \mathbb R^{T\times d}\ni H = [\textbf{h}_1,...,\textbf{h}_T], \mathbb R^{T\times d}\ni H_\text{ref} = [\textbf{h}^\text{ref}_1,...,\textbf{h}^\text{ref}_T] \\
+          \mathcal L_\text{geo} = \|HH^\top-H_\text{ref}H^\top_\text{ref}\|_F^2, \quad \mathcal L_\text{ent} = \|H^\top H - H_\text{ref}^\top H_\text{ref}\|_F^2 \\
+          \mathcal{L} = \mathcal{L}_\text{OPSD} + \alpha \mathcal{L}_\text{geo} + \beta\mathcal{L}_\text{ent}       
+        \end{gather*}
+
+        <blockquote>&ldquo;RGR effectively reduces correct-to-incorrect transitions while maintaining the self-improvement capability
+of OPSD&rdquo;</blockquote>
+      </article>
+
+
+      <article class="entry">
+        <div class="entry-head">
           <h3><a href="https://arxiv.org/pdf/2609.30652">Recursive Self-Improvement via On-Policy Distillation for Reasoning</a></h3>
           <span class="when">September 28th, 2026</span>
         </div>
