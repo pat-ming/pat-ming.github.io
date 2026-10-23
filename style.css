@@ -163,6 +163,19 @@ footer {
   font-size: 13.5px;
 }
 
+/* ---------- side-by-side sections ---------- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 54px;
+}
+.two-col section { margin-bottom: 0; }
+.two-col section:first-child {
+  padding-right: 28px;
+  border-right: 1px solid var(--line);
+}
+.two-col section:last-child { padding-left: 28px; }
+
 /* ---------- phones ---------- */
 @media (max-width: 620px) {
   body { padding: 28px 20px 60px; }
@@ -172,6 +185,9 @@ footer {
   .entry-head { flex-direction: column; gap: 0; }
   .entry .when { white-space: normal; }
   .contact .label { display: block; width: auto; }
+  .two-col { grid-template-columns: 1fr; }
+  .two-col section:first-child { padding-right: 0; border-right: none; margin-bottom: 54px; }
+  .two-col section:last-child { padding-left: 0; }
 }
 
 /* ---------- printing (mostly for the CV page) ---------- */
